@@ -1,0 +1,46 @@
+body {
+  background: #fafaf9;
+}
+
+.main-div {
+  background: #fff;
+  margin-top: 10%;
+  margin-left: 35%;
+  border: 1px solid #d8d8d7;
+}
+
+.sub-div {
+  background: #fff;
+  margin-left: 35%;
+  margin-top: 1rem;
+  border: 1px solid #d8d8d7;
+  padding: 1rem;
+  text-align: center;
+}
+
+.form-control-sm {
+  background: #fafaf9;
+}
+
+.btn {
+  width: 100%;
+  margin: 0px;
+  text-transform: none;
+}
+
+.row {
+  margin: 0rem 0rem 0.3rem 0rem;
+  padding: 0px;
+}
+
+.form-div {
+  padding: 2rem;
+}
+
+p {
+  margin: 0px;
+  padding: 0px;
+}
+h1 {
+  font-family: 'Sofia', cursive;
+}
