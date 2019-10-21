@@ -31,10 +31,10 @@ class LogIn extends Component {
                         this.props.history.push('/home')
                         alert('success', 'Successfully Logged In');
                     } else {
-                        alert('error', 'Invalid Password');
+                        alert('error', "The password that you've entered is incorrect.");
                     }
                 }).catch(err => {
-                    alert('error', 'Invalid Username or Password');
+                    alert('error', "The username that you've entered doesn't match any account.");
                 })
         } else {
             alert('error', 'Enter Username and Password');
@@ -49,7 +49,7 @@ class LogIn extends Component {
                         <MDBCol className="col-md-12 form-div">
                             <h1 style={{ textAlign: "center", marginBottom: "1rem" }}>Instagram</h1>
                             <MDBRow>
-                                <input type="text" id="example1" name="uname" className="form-control form-control-sm" placeholder="Username or email" onChange={this.changeHandler} />
+                                <input type="text" id="example1" name="uname" className="form-control form-control-sm" placeholder="Username" onChange={this.changeHandler} />
                             </MDBRow>
                             <MDBRow>
                                 <input type="password" id="example2" name="password" className="form-control form-control-sm" placeholder="Password" onChange={this.changeHandler} />

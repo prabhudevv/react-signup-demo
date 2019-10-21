@@ -3,6 +3,7 @@ import { MDBCol, MDBBtn, MDBRow } from 'mdbreact';
 import { Link } from 'react-router-dom';
 import alert from '../notifications/alertMessage';
 import axios from 'axios';
+import validator from 'validator';
 
 class SignUp extends Component {
 
@@ -25,26 +26,41 @@ class SignUp extends Component {
 
     formSubmit = (e) => {
         e.preventDefault();
+        const email = this.state.email;
+        const fullname = this.state.fullname;
+        const uname = this.state.uname;
+        const password = this.state.password;
         var insertObj = {
-            email: this.state.email,
-            fullname: this.state.fullname,
-            uname: this.state.uname,
-            password: this.state.password
+            email,
+            fullname,
+            uname,
+            password
         }
-
-        axios.post(`http://localhost:8008/api/v1/users`, insertObj)
-            .then(response => {
-                if (response.data.success) {
-                    this.props.history.push('/')
-                    alert('success', 'Successfully Added New User');
+        if (email !== '' && fullname !== '' && uname !== '' && password !== '') {
+            if (validator.isEmail(email)) {
+                if (validator.isAlphanumeric(uname)) {
+                    axios.post(`http://localhost:8008/api/v1/users`, insertObj)
+                        .then(response => {
+                            if (response.data.success) {
+                                this.props.history.push('/')
+                                alert('success', 'Successfully registered new user');
+                            } else {
+                                this.setState({
+                                    color: 'danger',
+                                    res_msg: response.data.msg,
+                                    isOpen: !this.state.isOpen
+                                })
+                            }
+                        }).catch(err => console.log(err))
                 } else {
-                    this.setState({
-                        color: 'danger',
-                        res_msg: response.data.msg,
-                        isOpen: !this.state.isOpen
-                    })
+                    alert('error', 'Enter valid username');
                 }
-            }).catch(err => console.log(err))
+            } else {
+                alert('error', 'Enter valid email');
+            }
+        } else {
+            alert('error', 'Fill all details');
+        }
     }
 
     render() {
