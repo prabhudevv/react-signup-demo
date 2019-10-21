@@ -66,7 +66,7 @@ class SignUp extends Component {
                             <MDBRow>
                                 <input type="password" id="example4" name="password" className="form-control form-control-sm" placeholder="Password" onChange={this.changeHandler} />
                             </MDBRow>
-                            <MDBBtn color="primary" type="submits" size="sm">Sign up</MDBBtn>
+                            <MDBBtn color="primary" type="submit" size="sm">Sign up</MDBBtn>
                         </MDBCol>
                     </MDBCol>
 
