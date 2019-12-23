@@ -30,6 +30,7 @@ class SignUp extends Component {
         const fullname = this.state.fullname;
         const uname = this.state.uname;
         const password = this.state.password;
+
         var insertObj = {
             email,
             fullname,

@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { MDBCol, MDBBtn, MDBRow } from 'mdbreact';
-import { Link } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import axios from "axios";
-var md5 = require('md5');
+import md5 from './md5';
 
 class LogIn extends Component {
     constructor(props) {
         super(props)
+        const token = localStorage.getItem("token");
+        let loggedIn = true;
+        if (token == null) {
+            loggedIn = false
+        }
+
         this.state = {
             uname: "",
             password: "",
@@ -23,12 +29,16 @@ class LogIn extends Component {
     formSubmit = (e) => {
         e.preventDefault();
         const uname = this.state.uname;
-        const password = this.state.password;
+        const password = md5(this.state.password);
+
         if (uname !== '' && password !== '') {
             axios.get(`http://localhost:8008/api/v1/users/${uname}`)
                 .then(response => {
-                    if (response.data.data[0].password === md5(this.state.password)) {
-                        this.props.history.push('/home')
+                    if (response.data.data[0].password === password) {
+                        localStorage.setItem("token", "aaaaaaaaaaaaa");
+                        this.setState({
+                            loggedIn: true
+                        })
                         alert('success', 'Successfully Logged In');
                     } else {
                         alert('error', "The password that you've entered is incorrect.");
@@ -42,6 +52,9 @@ class LogIn extends Component {
     }
 
     render() {
+        if (this.state.loggedIn) {
+            return <Redirect to="./home" />
+        }
         return (
             <div>
                 <form onSubmit={this.formSubmit} >
